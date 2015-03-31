@@ -38,14 +38,14 @@
             <div class="filter">
               <label for="sort">Sort by</label>
               <select name="sort">
-                <option value="alpha" selected="selected">Alphabetical</option> 
+                <option value="alpha" selected="selected">Name</option> 
                 <option value="quantity">Total Assets</option> 
               </select>
             </div>
 
             <div class="filter">
-              <label for="search">Filter by name or location</label>
-              <input type="text" name="search" />
+              <!-- <label for="search">Filter by name or location</label> -->
+              <input style="width: 100%" type="text" name="search" placeholder="Filter by name or location" />
             </div>
           </div>
           <div id="map"></div>
@@ -69,7 +69,7 @@
 
           <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
           <div class="pic-label">
-            <h2>{{clean_name this.name}}</h2>
+            <h2>{{this.fullname}}</h2>
             <p>{{this.google_address}}</p>
           </div>
         </div>
@@ -85,6 +85,7 @@
   <script type="text/javascript" charset="utf-8" src="js/vendor/d3.min.js"></script>
   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+  <script src='js/states.js'></script>
   <script src="js/main.js"></script>
 </body>
 </html>
