@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font: 16px Helvetica, sans-serif;
+  background: #000;
+  padding: 3px;
 }
 
 header {
@@ -29,6 +31,10 @@ h2 {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+}
+
+.property .inner {
+  margin: 3px;
 }
 
 /* .property iframe { */

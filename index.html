@@ -16,11 +16,13 @@
 <div id="properties">
   {{#each items}}
   <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
-    <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
+    <div class="inner">
+      <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
 
-    <div class="overlay">
-      <img src="/images/people/{{this.cid}}.jpg">
-      <h2>{{clean_name this.name}}</h2>
+      <div class="overlay">
+        <img src="/images/people/{{this.cid}}.jpg">
+        <h2>{{clean_name this.name}}</h2>
+      </div>
     </div>
   </div>
   {{/each}}
