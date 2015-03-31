@@ -1,3 +1,17 @@
-img {
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.property {
+  float: left;
   width: 25%;
+  margin:0;
+  padding: 0;
+  position: relative;
+}
+
+img.main-image {
+  width: 100%;
 }
