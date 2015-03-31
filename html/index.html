@@ -34,7 +34,20 @@
           <h4>Google Street Views of Real Estate Assets</h4>
           <br>
           <p>A text analysis of all bills introduced in the House of Representatives was performed to determine linguistic similarity of bills from one Congress with the following Congress. Lines are drawn between similar bills, with the lightness of the lines representing the percent similarity.</p>
-          <br>
+          <div id="filters">
+            <div class="filter">
+              <label for="sort">Sort by</label>
+              <select name="sort">
+                <option value="alpha" selected="selected">Alphabetical</option> 
+                <option value="quantity">Total Assets</option> 
+              </select>
+            </div>
+
+            <div class="filter">
+              <label for="search">Filter by name or location</label>
+              <input type="text" name="search" />
+            </div>
+          </div>
           <div id="map"></div>
         </div>
       </div>
@@ -48,7 +61,7 @@
   <script id="property-template" type="text/x-handlebars-template">
   <div id="properties">
     {{#each items}}
-    <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
+    <div class="property">
       <div class="inner">
         <img src="http://congress-home.s3.amazonaws.com/images/property/{{this.pfid}}.jpg" class="main-image">
 
