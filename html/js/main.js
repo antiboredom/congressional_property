@@ -29,3 +29,9 @@ d3.csv('property.csv', function(data){
 
   })
 })
+
+
+Handlebars.registerHelper('clean_name', function(name) {
+  var parts = name.split(', ')
+  return parts[1] + ' ' + parts[0]
+});
