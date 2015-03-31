@@ -3,20 +3,57 @@ body {
   padding: 0;
 }
 
-
 .property {
   float: left;
   width: 25%;
   margin:0;
   padding: 0;
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
+
+/* .property iframe { */
+/*   position: absolute; */
+/*   z-index: 1; */
+/* } */
 
 img.main-image {
   width: 100%;
+  /* height: 100%; */
+  /* position: absolute; */
+  /* z-index: 2; */
 }
 
 .overlay {
   position: absolute;
   bottom: 0;
+  z-index: 3;
+}
+
+
+
+
+@media (max-width: 1600px) {
+  .property {
+    width: 25%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .property {
+    width: 33.33%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .property {
+    width: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .property {
+    width: 100%;
+  }
 }
