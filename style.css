@@ -15,3 +15,8 @@ body {
 img.main-image {
   width: 100%;
 }
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+}
