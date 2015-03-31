@@ -28,12 +28,20 @@ $(window).ready(function() {
 
 
 
+var people_assets = {};
 
 d3.csv('assets/property.csv', function(data){
 
-  data = data.sort(function(a, b){
-    return a.name >= b.name ? 1 : -1;
+  data = data.sort(sorters.alpha);
+
+  data.forEach(function(d){
+    if (people_assets[d.name]){
+      people_assets[d.name] ++;
+    } else {
+      people_assets[d.name] = 1;
+    }
   });
+
   data = {items: data};
 
   var template_source = d3.select("#property-template").html();
@@ -65,8 +73,25 @@ d3.csv('assets/property.csv', function(data){
       me.on('click', null)
 
     });
+
+  d3.select('select[name="sort"]').on('change', function(){
+    d3.selectAll('.property').sort(sorters[this.value]);
+  })
 });
 
+var sorters = {
+  alpha: function(a, b){
+    return a.name >= b.name ? 1 : -1;
+  },
+  quantity: function(a, b){
+    var asset_count = people_assets[b.name] - people_assets[a.name];
+    if (asset_count != 0) {
+      return asset_count;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
+  }
+}
 
 Handlebars.registerHelper('clean_name', function(name) {
   var parts = name.split(', ');
