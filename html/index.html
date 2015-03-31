@@ -17,10 +17,10 @@
   {{#each items}}
   <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
     <div class="inner">
-      <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
+      <img src="http://congress-home.s3.amazonaws.com/images/property/{{this.pfid}}.jpg" class="main-image">
 
       <div class="overlay">
-        <img src="/images/people/{{this.cid}}.jpg">
+        <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
         <h2>{{clean_name this.name}}</h2>
       </div>
     </div>
