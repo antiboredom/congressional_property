@@ -132,7 +132,35 @@ def addresses():
         for row in reader:
             print row[0] + '::::' + row[5]
 
-addresses()
+
+def munge_embed_codes():
+    writer = csv.writer(sys.stdout)
+    writer.writerow(['pfid', 'cid', 'name', 'code', 'original_address', 'google_address', 'lat', 'lng', 'streetview_link', 'streetview_embed'])
+
+    with open('embed_codes.txt', 'r') as f:
+        lines = f.readlines()
+    lines = [l.strip().split('::::') for l in lines]
+
+    urls = {}
+
+    for line in lines:
+        try:
+            pid, streetview_link, streetview_embed = line
+            match = re.search(r'src="(.*?)"', streetview_embed)
+            streetview_embed = match.groups()[0]
+            urls[pid] = (streetview_link, streetview_embed)
+        except:
+            continue
+
+    with open('html/property_unique.csv', 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row[0] in urls:
+                row += [urls[row[0]][0], urls[row[0]][1]]
+            writer.writerow(row)
+
+
+munge_embed_codes()
 
 # remove_duplicates()
 

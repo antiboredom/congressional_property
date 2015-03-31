@@ -7,15 +7,10 @@
   <title>Property</title>
 </head>
 <body>
+<header>
+  <h1>Real Estate Assets Owned by U.S. Senators and Congresspeople</h2>
+</header>
 <div id="properties-wrapper"></div>
-
-<script id="property-template-iframe" type="text/x-handlebars-template">
-<div id="properties">
-  {{#each items}}
-    <iframe frameborder="0" src="{{this.streetview_embed}}" class="sv-embed" width="25%" height="400"></iframe>
-  {{/each}}
-</div>
-</script>
 
 <script id="property-template" type="text/x-handlebars-template">
 <div id="properties">
