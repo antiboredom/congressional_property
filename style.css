@@ -16,6 +16,11 @@ h1 {
   text-transform: uppercase;
 }
 
+h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
 .property {
   float: left;
   width: 25%;

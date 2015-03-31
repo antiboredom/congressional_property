@@ -14,15 +14,18 @@ d3.csv('property.csv', function(data){
     var img = me.select('.main-image');
     var h = this.getBoundingClientRect().height;
 
-    me
+    var iframe = me
       .append('iframe')
       .attr('src', embed_url)
       .attr('width', '100%')
       .attr('height', h)
       .attr('frameborder', '0')
-    img.remove()
+      .style('display', 'none')
 
-    // setTimeout(function(){
-    // }, 800);
+    iframe.on('load', function(){
+      iframe.style('display', 'block')
+      img.remove()
+    })
+
   })
 })
