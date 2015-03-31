@@ -47,9 +47,21 @@ img.main-image {
   position: absolute;
   bottom: 0;
   z-index: 3;
+  width: 100%;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  line-height: 60px;
 }
 
+.overlay h2 {
+  float: left;
+}
 
+.overlay img {
+  float: left;
+  margin-right: 10px;
+  height: 60px;
+}
 
 
 @media (max-width: 1600px) {
