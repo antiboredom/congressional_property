@@ -2,12 +2,23 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <script type="text/javascript" charset="utf-8" src="js/d3.min.js"></script>
-  <script type="text/javascript" charset="utf-8" src="js/handlebars.runtime-v3.0.0.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/handlebars-v3.0.0.js"></script>
   <link rel="stylesheet" href="style.css" type="text/css" />
   <title>Property</title>
 </head>
 <body>
-<div id="images"></div>
+<div id="properties-wrapper"></div>
+
+<script id="property-template" type="text/x-handlebars-template">
+<div id="properties">
+  {{#each items}}
+  <a href="https://google.com/maps/search/{{this.google_address}}" class="property" target="_blank">
+    <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
+  </a>
+  {{/each}}
+</div>
+</script>
+
 <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 </body>
 </html>
