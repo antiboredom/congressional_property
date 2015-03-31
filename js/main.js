@@ -29,6 +29,8 @@ d3.csv('property.csv', function(data){
       img.remove()
     })
 
+    me.on('click', null);
+
   })
 })
 
