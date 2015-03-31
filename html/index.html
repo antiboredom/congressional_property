@@ -49,14 +49,16 @@
   <div id="properties">
     {{#each items}}
     <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
-      <img src="http://congress-home.s3.amazonaws.com/images/property/{{this.pfid}}.jpg" class="main-image">
+      <div class="inner">
+        <img src="http://congress-home.s3.amazonaws.com/images/property/{{this.pfid}}.jpg" class="main-image">
 
-      <div class="overlay">
+        <div class="overlay">
 
-        <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
-        <div class="pic-label">
-          <h2>{{clean_name this.name}}</h2>
-          <p>{{this.google_address}}</p>
+          <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
+          <div class="pic-label">
+            <h2>{{clean_name this.name}}</h2>
+            <p>{{this.google_address}}</p>
+          </div>
         </div>
       </div>
     </div>
