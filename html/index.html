@@ -14,6 +14,11 @@
   {{#each items}}
   <a href="https://google.com/maps/search/{{this.google_address}}" class="property" target="_blank">
     <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
+
+    <div class="overlay">
+      <img src="/images/people/{{this.cid}}.jpg">
+      <h2>{{this.name}}</h2>
+    </div>
   </a>
   {{/each}}
 </div>
