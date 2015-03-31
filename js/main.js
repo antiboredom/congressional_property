@@ -32,6 +32,12 @@ var people_assets = {};
 
 d3.csv('assets/property.csv', function(data){
 
+  data = data.map(function(d){
+    d.fullname = clean_name(d.name);
+    d.address = extract_address(d.google_address);
+    return d;
+  })
+
   data = data.sort(sorters.alpha);
 
   data.forEach(function(d){
@@ -76,7 +82,24 @@ d3.csv('assets/property.csv', function(data){
 
   d3.select('select[name="sort"]').on('change', function(){
     d3.selectAll('.property').sort(sorters[this.value]);
-  })
+  });
+
+  d3.select('input[name="search"]').on('keyup', function(){
+    var q = this.value.toLowerCase();
+
+    d3.selectAll('.property').each(function(d){
+      var name = d.fullname.toLowerCase();
+      var city = d.address.city ? d.address.city.toLowerCase() : null;
+      var state = d.address.state ? d.address.state.toLowerCase() : null;
+
+      if (name.indexOf(q) > -1 || (city && city.indexOf(q) > -1) || (state && state.indexOf(q) > -1)) {
+        this.style.display = 'block';
+      } else {
+        this.style.display = 'none';
+      }
+    });
+  });
+
 });
 
 var sorters = {
@@ -93,8 +116,19 @@ var sorters = {
   }
 }
 
-Handlebars.registerHelper('clean_name', function(name) {
+Handlebars.registerHelper('clean_name', clean_name);
+
+function clean_name(name) {
   var parts = name.split(', ');
   return parts[1] + ' ' + parts[0];
-});
+}
 
+function extract_address(address) {
+  address = address.split(', ');
+  return {
+    street: address[0],
+    city: address[1] ? address[1] : null,
+    state: address[2] ? address[2].slice(0, 2) : null,
+    fullstate: address[2] && states[address[2]] ? states[address[2]] : null
+  }
+}
