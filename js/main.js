@@ -1,5 +1,7 @@
 d3.csv('property.csv', function(data){
-
+  data = data.sort(function(a, b){
+    return a.name >= b.name ? 1 : -1;
+  })
   data = {items: data}
 
   var template_source = d3.select("#property-template").html();

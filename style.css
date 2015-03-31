@@ -51,6 +51,7 @@ img.main-image {
   background: rgba(0, 0, 0, .5);
   color: #fff;
   line-height: 60px;
+  padding: 10px;
 }
 
 .overlay h2 {
@@ -61,6 +62,7 @@ img.main-image {
   float: left;
   margin-right: 10px;
   height: 60px;
+  border-radius: 8px;
 }
 
 
