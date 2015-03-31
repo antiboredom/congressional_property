@@ -1,4 +1,4 @@
-d3.csv('property_unique.csv', function(data){
+d3.csv('property.csv', function(data){
 
   data = {items: data}
 
@@ -6,5 +6,23 @@ d3.csv('property_unique.csv', function(data){
   var property_template = Handlebars.compile(template_source);
 
   var html = property_template(data)
-  d3.select('#properties-wrapper').html(html) 
+  d3.select('#properties-wrapper').html(html)
+
+  d3.selectAll('.property').on('click', function(){
+    var me = d3.select(this);
+    var embed_url = me.attr('data-embed');
+    var img = me.select('.main-image');
+    var h = this.getBoundingClientRect().height;
+
+    me
+      .append('iframe')
+      .attr('src', embed_url)
+      .attr('width', '100%')
+      .attr('height', h)
+      .attr('frameborder', '0')
+    img.remove()
+
+    // setTimeout(function(){
+    // }, 800);
+  })
 })

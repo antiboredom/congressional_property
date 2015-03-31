@@ -9,17 +9,25 @@
 <body>
 <div id="properties-wrapper"></div>
 
+<script id="property-template-iframe" type="text/x-handlebars-template">
+<div id="properties">
+  {{#each items}}
+    <iframe frameborder="0" src="{{this.streetview_embed}}" class="sv-embed" width="25%" height="400"></iframe>
+  {{/each}}
+</div>
+</script>
+
 <script id="property-template" type="text/x-handlebars-template">
 <div id="properties">
   {{#each items}}
-  <a href="https://google.com/maps/search/{{this.google_address}}" class="property" target="_blank">
+  <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
     <img src="/images/property/{{this.pfid}}.jpg" class="main-image">
 
     <div class="overlay">
       <img src="/images/people/{{this.cid}}.jpg">
       <h2>{{this.name}}</h2>
     </div>
-  </a>
+  </div>
   {{/each}}
 </div>
 </script>
