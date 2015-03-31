@@ -46,9 +46,9 @@ d3.csv('assets/property.csv', function(data){
     var me = d3.select(this);
     var embed_url = me.attr('data-embed');
     var img = me.select('.main-image');
-    var h = this.getBoundingClientRect().height;
+    var h = me.select('.inner').node().getBoundingClientRect().height;
 
-    var iframe = me
+    var iframe = me.select('.inner')
       .append('iframe')
       .attr('src', embed_url)
       .attr('width', '100%')
