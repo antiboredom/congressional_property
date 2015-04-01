@@ -30,6 +30,40 @@ $(window).ready(function() {
 
 var people_assets = {};
 
+var sorters = {
+  alpha: function(a, b){
+    return a.name >= b.name ? 1 : -1;
+  },
+  quantity: function(a, b){
+    var asset_count = people_assets[b.name] - people_assets[a.name];
+    if (asset_count != 0) {
+      return asset_count;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
+  }
+}
+
+function clean_name(name) {
+  var parts = name.split(', ');
+  return parts[1] + ' ' + parts[0];
+}
+
+function extract_address(address) {
+  address = address.split(', ');
+  var street = address[0];
+  var city = address[1] ? address[1] : null;
+  var state = address[2] ? address[2].slice(0, 2) : null;
+  var fullstate = state && states[state] ? states[state] : null;
+
+  return {
+    street: street,
+    city: city,
+    state: state,
+    fullstate: fullstate
+  };
+}
+
 d3.csv('assets/property.csv', function(data){
 
   data = data.map(function(d){
@@ -102,38 +136,3 @@ d3.csv('assets/property.csv', function(data){
 
 });
 
-var sorters = {
-  alpha: function(a, b){
-    return a.name >= b.name ? 1 : -1;
-  },
-  quantity: function(a, b){
-    var asset_count = people_assets[b.name] - people_assets[a.name];
-    if (asset_count != 0) {
-      return asset_count;
-    } else {
-      return a.name >= b.name ? 1 : -1;
-    }
-  }
-}
-
-Handlebars.registerHelper('clean_name', clean_name);
-
-function clean_name(name) {
-  var parts = name.split(', ');
-  return parts[1] + ' ' + parts[0];
-}
-
-function extract_address(address) {
-  address = address.split(', ');
-  var street = address[0];
-  var city = address[1] ? address[1] : null;
-  var state = address[2] ? address[2].slice(0, 2) : null;
-  var fullstate = state && states[state] ? states[state] : null;
-
-  return {
-    street: street,
-    city: city,
-    state: state,
-    fullstate: fullstate
-  };
-}
