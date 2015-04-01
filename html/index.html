@@ -34,7 +34,20 @@
           <h4>Google Street Views of Real Estate Assets</h4>
           <br>
           <p>A text analysis of all bills introduced in the House of Representatives was performed to determine linguistic similarity of bills from one Congress with the following Congress. Lines are drawn between similar bills, with the lightness of the lines representing the percent similarity.</p>
-          <br>
+          <div id="filters">
+            <div class="filter">
+              <label for="sort">Sort by</label>
+              <select name="sort">
+                <option value="alpha" selected="selected">Name</option> 
+                <option value="quantity">Total Assets</option> 
+              </select>
+            </div>
+
+            <div class="filter">
+              <!-- <label for="search">Filter by name or location</label> -->
+              <input style="width: 100%" type="text" name="search" placeholder="Filter by name or location" />
+            </div>
+          </div>
           <div id="map"></div>
         </div>
       </div>
@@ -48,7 +61,7 @@
   <script id="property-template" type="text/x-handlebars-template">
   <div id="properties">
     {{#each items}}
-    <div data-embed="{{this.streetview_embed}}" data-url="{{this.streetview_link}}" class="property">
+    <div class="property">
       <div class="inner">
         <img src="http://congress-home.s3.amazonaws.com/images/property/{{this.pfid}}.jpg" class="main-image">
 
@@ -56,7 +69,7 @@
 
           <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
           <div class="pic-label">
-            <h2>{{clean_name this.name}}</h2>
+            <h2>{{this.fullname}}</h2>
             <p>{{this.google_address}}</p>
           </div>
         </div>
@@ -72,7 +85,7 @@
   <script type="text/javascript" charset="utf-8" src="js/vendor/d3.min.js"></script>
   <script type="text/javascript" charset="utf-8" src="js/vendor/cartodb.v3.13.min.js"></script>
   <script type="text/javascript" charset="utf-8" src="js/vendor/mapbox.v2.1.5.standalone.js"></script>
-  
+  <script src='js/states.js'></script>
   <script src="js/main.js"></script>
 </body>
 </html>
