@@ -1,30 +1,21 @@
-// window.onload = function() {
-//   cartodb.createVis('map', 'http://brianclifton.cartodb.com/api/v2/viz/e7a71802-d7e8-11e4-a3f7-0e018d66dc29/viz.json');
-// };
 
-$(window).ready(function() {
+window.onload = function() {
   var map = new L.Map('map', {
       center: [39.8282, -98.5795],
       zoom: 2
     });
 
   L.mapbox.tileLayer('bclifton.j3dc99p7', {
-    accessToken: 'pk.eyJ1IjoiYmNsaWZ0b24iLCJhIjoicWNXT0Z6OCJ9.JvNO6GIbU8BZ-8LLSEwz2Q',
-    attribution: 'Brian Clifton | <a href="http://cartodb.com/">CartoDB</a> | <a href="https://www.mapbox.com/">MapBox</a>'
-  }).addTo(map);
+      accessToken: 'pk.eyJ1IjoiYmNsaWZ0b24iLCJhIjoicWNXT0Z6OCJ9.JvNO6GIbU8BZ-8LLSEwz2Q',
+      attribution: 'Brian Clifton | <a href="http://cartodb.com/">CartoDB</a> | <a href="https://www.mapbox.com/">MapBox</a>'
+    })
+    .addTo(map);
 
-  cartodb.createLayer(map, 'http://brianclifton.cartodb.com/api/v2/viz/e7a71802-d7e8-11e4-a3f7-0e018d66dc29/viz.json')
-    .addTo(map)
-    // .on('done', function(layer) {
-    //   //do stuff
-    // })
-    // .on('error', function(err) {
-    //   // alert("some error occurred: " + err);
-    // })
-    ;
-  // cartodb.createVis('map', 'http://brianclifton.cartodb.com/api/v2/viz/e7a71802-d7e8-11e4-a3f7-0e018d66dc29/viz.json');
+  cartodb.createLayer(map, 'http://brianclifton.cartodb.com/api/v2/viz/4555978a-d7f8-11e4-8d55-0e0c41326911/viz.json')
+    .addTo(map);
 
-});
+    
+};
 
 
 
