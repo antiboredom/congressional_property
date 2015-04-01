@@ -90,7 +90,7 @@ d3.csv('assets/property.csv', function(data){
     d3.selectAll('.property').each(function(d){
       var name = d.fullname.toLowerCase();
       var city = d.address.city ? d.address.city.toLowerCase() : null;
-      var state = d.address.state ? d.address.state.toLowerCase() : null;
+      var state = d.address.fullstate ? d.address.fullstate.toLowerCase() : null;
 
       if (name.indexOf(q) > -1 || (city && city.indexOf(q) > -1) || (state && state.indexOf(q) > -1)) {
         this.style.display = 'block';
@@ -125,10 +125,15 @@ function clean_name(name) {
 
 function extract_address(address) {
   address = address.split(', ');
+  var street = address[0];
+  var city = address[1] ? address[1] : null;
+  var state = address[2] ? address[2].slice(0, 2) : null;
+  var fullstate = state && states[state] ? states[state] : null;
+
   return {
-    street: address[0],
-    city: address[1] ? address[1] : null,
-    state: address[2] ? address[2].slice(0, 2) : null,
-    fullstate: address[2] && states[address[2]] ? states[address[2]] : null
-  }
+    street: street,
+    city: city,
+    state: state,
+    fullstate: fullstate
+  };
 }
