@@ -31,9 +31,10 @@
       <div class="col-sm-3">
         <div class="panel" id="info-panel">
           <h2>Real Estate Assets Owned by Members of the US Congress</h2>
+          <hr>
           <h4>Google Street Views of Real Estate Assets</h4>
-          <br>
           <p>A text analysis of all bills introduced in the House of Representatives was performed to determine linguistic similarity of bills from one Congress with the following Congress. Lines are drawn between similar bills, with the lightness of the lines representing the percent similarity.</p>
+          <hr>
           <div id="filters">
             <div class="filter">
               <label for="sort">Sort by</label>
@@ -42,7 +43,6 @@
                 <option value="quantity">Total Assets</option> 
               </select>
             </div>
-
             <div class="filter">
               <!-- <label for="search">Filter by name or location</label> -->
               <input style="width: 100%" type="text" name="search" placeholder="Filter by name or location" />
@@ -78,6 +78,8 @@
     {{/each}}
   </div>
   </script>
+
+  
 
   <script type="text/javascript" charset="utf-8" src="js/vendor/jquery-1.11.1.min.js"></script>
   <script src="js/vendor/bootstrap.min.js"></script>
