@@ -1,22 +1,60 @@
-
 window.onload = function() {
   var map = new L.Map('map', {
       center: [39.8282, -98.5795],
       zoom: 2
     });
 
-  L.mapbox.tileLayer('bclifton.j3dc99p7', {
+  L.mapbox.tileLayer('bclifton.9f0ca136', {
       accessToken: 'pk.eyJ1IjoiYmNsaWZ0b24iLCJhIjoicWNXT0Z6OCJ9.JvNO6GIbU8BZ-8LLSEwz2Q',
-      attribution: 'Brian Clifton | <a href="http://cartodb.com/">CartoDB</a> | <a href="https://www.mapbox.com/">MapBox</a>'
+      attribution: "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
     })
     .addTo(map);
 
-  cartodb.createLayer(map, 'http://brianclifton.cartodb.com/api/v2/viz/4555978a-d7f8-11e4-8d55-0e0c41326911/viz.json')
-    .addTo(map);
+  var sublayerOptions = {
+          sql: "SELECT * FROM property_unique_carto",
+          cartocss: "#null{"+
+            "marker-fill-opacity: 0.9;"+
+            "marker-line-color: #FFF;"+
+            "marker-line-width: 1.5;"+
+            "marker-line-opacity: 0;"+
+            "marker-placement: point;"+
+            "marker-type: ellipse;"+
+            "marker-width: 6;"+
+            "marker-fill: #e6842a;"+
+            "marker-opacity: 0.75;"+
+            "marker-allow-overlap: true;"+
+          "}"
+    };
 
-    
+  cartodb.createLayer(map, 'http://brianclifton.cartodb.com/api/v2/viz/0aac4b22-d881-11e4-843e-0e0c41326911/viz.json')
+    .addTo(map)
+    .on('done', function(layer){
+      var sublayer = layer.getSubLayer(0);
+      sublayer.set(sublayerOptions);
+      sublayers.push(sublayer);
+
+      sublayer.on('featureClick', function(e, latlng, pos, data) {
+        // console.log('data:', data);
+      });     
+    })
+    .on('error', function(err) {
+        console.log(err);
+    });    
 };
 
+var sublayers = [];
+
+var LayerActions = {
+  selection: function(cids){
+    var c = cids.join("','");
+    var query = "SELECT * FROM property_unique_carto WHERE cid IN ('" + c + "')";
+    sublayers[0].setSQL(query);
+    return true;
+  },
+  all: function(){
+    sublayers[0].setSQL("SELECT * FROM property_unique_carto");
+  }
+};
 
 
 var people_assets = {};
@@ -27,13 +65,13 @@ var sorters = {
   },
   quantity: function(a, b){
     var asset_count = people_assets[b.name] - people_assets[a.name];
-    if (asset_count != 0) {
+    if (asset_count !== 0) {
       return asset_count;
     } else {
       return a.name >= b.name ? 1 : -1;
     }
   }
-}
+};
 
 function clean_name(name) {
   var parts = name.split(', ');
@@ -61,7 +99,7 @@ d3.csv('assets/property.csv', function(data){
     d.fullname = clean_name(d.name);
     d.address = extract_address(d.google_address);
     return d;
-  })
+  });
 
   data = data.sort(sorters.alpha);
 
@@ -101,7 +139,7 @@ d3.csv('assets/property.csv', function(data){
         img.remove();
       });
 
-      me.on('click', null)
+      me.on('click', null);
 
     });
 
@@ -112,18 +150,44 @@ d3.csv('assets/property.csv', function(data){
   d3.select('input[name="search"]').on('keyup', function(){
     var q = this.value.toLowerCase();
 
+    if (q.length < 1) {
+      LayerActions.all();
+    }    
+    
+    var cids = {};
+
     d3.selectAll('.property').each(function(d){
       var name = d.fullname.toLowerCase();
       var city = d.address.city ? d.address.city.toLowerCase() : null;
       var state = d.address.fullstate ? d.address.fullstate.toLowerCase() : null;
-
+      
       if (name.indexOf(q) > -1 || (city && city.indexOf(q) > -1) || (state && state.indexOf(q) > -1)) {
+        cids[d.cid.toUpperCase()] = null;
         this.style.display = 'block';
       } else {
         this.style.display = 'none';
       }
     });
+
+    if (q.length >= 1) {
+      LayerActions.selection(Object.keys(cids));
+    }    
   });
 
 });
 
+
+
+function select(d){
+  d3.selectAll('.property').each(function(d){
+    var name = d.fullname.toLowerCase();
+    var city = d.address.city ? d.address.city.toLowerCase() : null;
+    var state = d.address.fullstate ? d.address.fullstate.toLowerCase() : null;
+
+    if (d.id) {
+      this.style.display = 'block';
+    } else {
+      this.style.display = 'none';
+    }
+  });
+}
