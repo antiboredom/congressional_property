@@ -147,7 +147,7 @@ d3.csv('assets/property.csv', function(data){
 
   d3.select('.click-filter').on('click', function(d){
     d3.event.preventDefault();
-    var q = this.text;
+    var q = d3.select(this).attr('data-q');
     var i = document.getElementById('search');
     i.value = q;
     filter_people(q);
