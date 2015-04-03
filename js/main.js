@@ -36,9 +36,9 @@ window.onload = function() {
       sublayer.set(sublayerOptions);
       sublayers.push(sublayer);
 
-      sublayer.on('featureClick', function(e, latlng, pos, data) {
-        console.log('data:', data);
-      });     
+      // sublayer.on('featureClick', function(e, latlng, pos, data) {
+      //   console.log('data:', data);
+      // });     
     })
     .on('error', function(err) {
         console.log(err);
@@ -46,9 +46,9 @@ window.onload = function() {
 };
 
 var LayerActions = {
-  selection: function(cids){
-    var c = cids.join("','");
-    var query = "SELECT * FROM property_unique_carto WHERE cid IN ('" + c + "')";
+  selection: function(ids){
+    var id = ids.join("','");
+    var query = "SELECT * FROM property_unique_carto WHERE pfid IN ('" + id + "')";
     sublayers[0].setSQL(query);
     return true;
   },
@@ -165,7 +165,7 @@ d3.csv('assets/property.csv', function(data){
       LayerActions.all();
     }    
     
-    var cids = {};
+    var pfids = {};
 
     d3.selectAll('.property').each(function(d){
       var name = d.fullname.toLowerCase();
@@ -173,7 +173,7 @@ d3.csv('assets/property.csv', function(data){
       var state = d.address.fullstate ? d.address.fullstate.toLowerCase() : null;
       
       if (name.indexOf(q) > -1 || (city && city.indexOf(q) > -1) || (state && state.indexOf(q) > -1)) {
-        cids[d.cid.toUpperCase()] = null;
+        pfids[d.pfid.toUpperCase()] = null;
         this.style.display = 'block';
       } else {
         this.style.display = 'none';
@@ -181,7 +181,7 @@ d3.csv('assets/property.csv', function(data){
     });
 
     if (q.length >= 1) {
-      LayerActions.selection(Object.keys(cids));
+      LayerActions.selection(Object.keys(pfids));
     }    
   }
 });
