@@ -1,5 +1,5 @@
 var sublayers = [];
-var people_assets = {};
+
 
 window.onload = function() {
   var map = new L.Map('map', {
@@ -57,6 +57,10 @@ var LayerActions = {
   }
 };
 
+
+
+var people_assets = {};
+
 var sorters = {
   alpha: function(a, b){
     return a.name >= b.name ? 1 : -1;
@@ -94,6 +98,7 @@ function extract_address(address) {
 d3.csv('assets/property.csv', function(data){
 
   data = data.map(function(d){
+    // d.fullname = d.full_name;
     d.fullname = clean_name(d.name);
     d.address = extract_address(d.google_address);
     return d;
