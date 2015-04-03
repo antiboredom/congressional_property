@@ -18,7 +18,7 @@ h1 {
 }
 
 h2 {
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
   font-family: 'Roboto';
   font-weight: normal;
 }
@@ -41,6 +41,10 @@ label {
 input {
   font-style: italic;
   font-size: 14px;
+}
+
+a {
+  color: #156b90;
 }
 
 .container {
@@ -163,6 +167,19 @@ img.main-image {
   font-size: 12px;
   margin-bottom: 0px;
 }
+
+
+.close {
+  line-height: 0.7;
+  font-size: 18px;
+  color: #42a5b3 !important;
+  opacity: 0.4;
+}
+
+.close:hover {
+  opacity: 0.8;
+}
+
 
 @media (max-width: 1600px) {
   .property {
