@@ -31,9 +31,19 @@
       <div class="col-sm-3">
         <div class="panel" id="info-panel">
           <h2>Real Estate Assets Owned by Members of the US Congress</h2>
-          <hr>
-          <h4>Google Street Views of Real Estate Assets</h4>
-          <p>A text analysis of all bills introduced in the House of Representatives was performed to determine linguistic similarity of bills from one Congress with the following Congress. Lines are drawn between similar bills, with the lightness of the lines representing the percent similarity.</p>
+          <p>
+            Congressional politicians are required by law to disclose their financial assets. 
+            For assets with names resembling addresses, Google Street View was used to search for the places and a snapshot was taken of the property.
+          </p>
+          <p>
+            Some of these properties were unexpected, such as the real estate <a class="click-filter" href="#">Jeff Duncan</a> owns.
+          </p>
+          <p>
+            Clicking on the image will bring up the Google Street View of the property, where you can explore the surrounding area.
+          </p>
+
+          <p>Made in collaboration with <a href="https://lav.io">Sam Lavigne</a>.</p>
+          <p>DATA SOURCE: <a href="https://www.opensecrets.org" target="blank">OpenSecrets.org</a></p>
           <hr>
           <div id="filters">
             <div class="filter">
@@ -45,7 +55,7 @@
             </div>
             <div class="filter">
               <!-- <label for="search">Filter by name or location</label> -->
-              <input style="width: 100%" type="text" name="search" placeholder="Filter by name or location" />
+              <input style="width: 100%" type="text" name="search" id="search" placeholder="Filter by name or location" />
             </div>
           </div>
           <div id="map"></div>

@@ -1,3 +1,6 @@
+var sublayers = [];
+var people_assets = {};
+
 window.onload = function() {
   var map = new L.Map('map', {
       center: [39.8282, -98.5795],
@@ -34,15 +37,13 @@ window.onload = function() {
       sublayers.push(sublayer);
 
       sublayer.on('featureClick', function(e, latlng, pos, data) {
-        // console.log('data:', data);
+        console.log('data:', data);
       });     
     })
     .on('error', function(err) {
         console.log(err);
     });    
 };
-
-var sublayers = [];
 
 var LayerActions = {
   selection: function(cids){
@@ -55,9 +56,6 @@ var LayerActions = {
     sublayers[0].setSQL("SELECT * FROM property_unique_carto");
   }
 };
-
-
-var people_assets = {};
 
 var sorters = {
   alpha: function(a, b){
@@ -147,8 +145,21 @@ d3.csv('assets/property.csv', function(data){
     d3.selectAll('.property').sort(sorters[this.value]);
   });
 
+  d3.select('.click-filter').on('click', function(d){
+    d3.event.preventDefault();
+    var q = this.text;
+    var i = document.getElementById('search');
+    i.value = q;
+    filter_people(q);
+  });
+
+
   d3.select('input[name="search"]').on('keyup', function(){
-    var q = this.value.toLowerCase();
+    filter_people(this.value);
+  });
+
+  function filter_people(q) {
+    q = q.toLowerCase();
 
     if (q.length < 1) {
       LayerActions.all();
@@ -172,11 +183,8 @@ d3.csv('assets/property.csv', function(data){
     if (q.length >= 1) {
       LayerActions.selection(Object.keys(cids));
     }    
-  });
-
+  }
 });
-
-
 
 function select(d){
   d3.selectAll('.property').each(function(d){
