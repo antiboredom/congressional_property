@@ -72,6 +72,38 @@ var sorters = {
     } else {
       return a.name >= b.name ? 1 : -1;
     }
+  },
+  income: function(a, b){
+    var value_diff = b.min_income - a.min_income;
+    if (value_diff !== 0) {
+      return value_diff;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
+  },
+  incomeAsc: function(a, b){
+    var value_diff = a.min_income - b.min_income;
+    if (value_diff !== 0) {
+      return value_diff;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
+  },
+  value: function(a, b){
+    var value_diff = b.min_value - a.min_value;
+    if (value_diff !== 0) {
+      return value_diff;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
+  },
+  valueAsc: function(a, b){
+    var value_diff = a.min_value - b.min_value;
+    if (value_diff !== 0) {
+      return value_diff;
+    } else {
+      return a.name >= b.name ? 1 : -1;
+    }
   }
 };
 
@@ -95,7 +127,7 @@ function extract_address(address) {
   };
 }
 
-d3.csv('assets/property.csv', function(data){
+d3.csv('assets/property_with_income.csv', function(data){
 
   data = data.map(function(d){
     // d.fullname = d.full_name;
@@ -204,3 +236,25 @@ function select(d){
     }
   });
 }
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+Handlebars.registerHelper('display_value', function(minv, maxv){
+  if (!minv || !maxv) {
+    return 'unknown';
+  }
+  minv = +minv;
+  maxv = +maxv;
+  if (minv === maxv){
+    if (minv === 0) {
+      return '$0.0';
+    } else {
+      return 'Over $' + numberWithCommas(minv-1);
+    }
+  } else {
+    if (minv > 0) minv--;
+    return '$' + numberWithCommas(minv) + ' to $' + numberWithCommas(maxv);
+  }
+});

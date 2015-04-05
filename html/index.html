@@ -51,6 +51,10 @@
               <select name="sort">
                 <option value="alpha" selected="selected">Name</option> 
                 <option value="quantity">Total Assets</option> 
+                <option value="value">Value (high to low)</option> 
+                <option value="valueAsc">Value (low to high)</option> 
+                <option value="income">Income (high to low)</option> 
+                <option value="incomeAsc">Income (low to high)</option> 
               </select>
             </div>
             <div class="filter">
@@ -81,6 +85,8 @@
           <div class="pic-label">
             <h2>{{this.fullname}}</h2>
             <p>{{this.google_address}}</p>
+            <p>Value: {{display_value this.min_value this.max_value}}</p>
+            <p>Yearly Income: {{display_value this.min_income this.max_income}}</p>
           </div>
         </div>
       </div>
