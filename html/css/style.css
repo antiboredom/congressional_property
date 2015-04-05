@@ -147,6 +147,13 @@ img.main-image {
   font-size: 20px;
 }
 
+span.income {
+  font-weight: bold;
+}
+
+span.value {
+  font-weight: bold;
+}
 
 .carto-popup {
   padding: 10px;
