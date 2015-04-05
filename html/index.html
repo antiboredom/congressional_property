@@ -84,9 +84,9 @@
           <img src="http://congress-home.s3.amazonaws.com/images/people/{{this.cid}}.jpg">
           <div class="pic-label">
             <h2>{{this.fullname}}</h2>
-            <p>{{this.google_address}}</p>
-            <p>Reported value: {{display_value this.min_value this.max_value}}</p>
-            <p>Reported yearly income: {{display_value this.min_income this.max_income}}</p>
+            <p class="address">{{this.google_address}}</p>
+            <p class="asset-value">Reported value: {{display_value this.min_value this.max_value}}</p>
+            <p class="asset-income">Reported yearly income: {{display_value this.min_income this.max_income}}</p>
           </div>
         </div>
       </div>
